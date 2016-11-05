@@ -8,7 +8,7 @@ const SECRET_FILE = '.serverless-secret.json';
 module.exports = {
   get(name) {
     const secret = JSON.parse(fs.readFileSync(SECRET_FILE, 'utf-8'));
-    const kms = new AWS.KMS({region: secret['__slscrypt-region']});
+    const kms = new AWS.KMS({ region: secret['__slscrypt-region'] });
     return new Promise((resolve, reject) => {
       kms.decrypt({
         CiphertextBlob: new Buffer(secret[name], 'base64'),
@@ -19,5 +19,5 @@ module.exports = {
         resolve(data.Plaintext.toString('utf-8'));
       });
     });
-  }
-}
+  },
+};

@@ -7,7 +7,8 @@ const decrypt = require('./lib/decrypt');
 const saveSecret = require('./lib/saveSecret');
 const addLibraries = require('./lib/addLibraries');
 const removeLibraries = require('./lib/removeLibraries');
-const SECRET_FILE = '.serverless-secret.json'
+
+const SECRET_FILE = '.serverless-secret.json';
 
 class Crypt {
   constructor(serverless, options) {
