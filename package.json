@@ -1,0 +1,39 @@
+{
+  "name": "serverless-crypt",
+  "version": "0.0.1",
+  "description": "Use the secrets in Serverless Framework",
+  "main": "index.js",
+  "scripts": {
+    "test": "./node_modules/.bin/istanbul cover ./node_modules/mocha/bin/_mocha",
+    "lint": "./node_modules/.bin/eslint ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/marcy-terui/serverless-crypt.git"
+  },
+  "author": "Masashi Terui",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/marcy-terui/serverless-crypt/issues"
+  },
+  "homepage": "https://github.com/marcy-terui/serverless-crypt#readme",
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "coveralls": "^2.11.14",
+    "eslint": "^3.9.1",
+    "eslint-config-airbnb": "^12.0.0",
+    "eslint-config-airbnb-base": "^9.0.0",
+    "eslint-plugin-import": "^2.0.1",
+    "eslint-plugin-jsx-a11y": "^2.2.3",
+    "eslint-plugin-react": "^6.5.0",
+    "istanbul": "^0.4.5",
+    "mocha": "^3.1.2",
+    "mocha-lcov-reporter": "^1.2.0",
+    "serverless": "^1.0.3",
+    "tap": "^8.0.0"
+  },
+  "dependencies": {
+    "aws-sdk": "^2.6.13",
+    "fs-extra": "^1.0.0"
+  }
+}
