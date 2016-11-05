@@ -7,7 +7,7 @@ serverless-crypt
 
 # Description
 
-Use the secrets in Serverless Framework.
+Securing the secrets on Serverless Framework by AWS KMS encrypting.
 
 # Requirements
 
