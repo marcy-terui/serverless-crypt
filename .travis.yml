@@ -1,0 +1,26 @@
+language: node_js
+
+matrix:
+  allow_failures:
+    - node_js: '4.4'
+  include:
+    - node_js: '5.11'
+    - node_js: '6.2'
+      env:
+        - secure: "wRg0oKfLMhOJBdjOMekUVwBbZi9CDv4zMoR8uVWZMiky1Eq8aSQdYsfCdWFw/5IM3YmBR26mzxXjxzNX9P9DiJ5eNK6r+jrHNMSK/YaeZ5TuV+kQ+87WBaHFsNKSRDSIWKx/8GkmFhiRj/FeXaXGqRu55MtJMTs38YWoAV1xn3TE0TpwpqhqTwu0rRpFhO+KBxm/YlGcCMJq4ZOQDLONCBzIKPczr+0GESU0DfBbdyalK78HMRhWdW20c/ri+gqxle+UF+zPAWLMYzOKR+A5Vs2kJmT7TQIOBQNQWHjc0k3zaq6zMB35Kgg5FnGDfaVn09hAk+sgHh+qG9uix1YDdkPCgcoU2FgkoftGX1DYdwRCT8ptlnsC2CTBpiUp+JvfXr5ixrXZCY5a9R2M9PdVo2QVmCH9fUzMbOJ+i/eqN/9gK1YtMd7NbX4g43K9Y+RE2OWhFmzJGfz/MT+uZVX+KcJdWSHyGP3wRBCgaRnEW/G6vahtBKcAnodMzC3zo5MJWb8tBv6Jno3/yB64/P/ewE3cqfX4ea7G0lc1PePnH4JuB8O+91ShtPOO6QfUHU8bTXbtO3ieZFT8+RAIJF2n0aap8OSuupGzc8cHxDraZj8V3Gpf0F5jRal5nYWC2+w/Npd4ngqlo4EXCK4H6r584DrxYzb7UxrDqATOK6GfMmU="
+    - node_js: '6.2'
+      env:
+        - DISABLE_TESTS=true
+        - LINTING=true
+
+sudo: false
+
+install:
+  - travis_retry npm install
+
+script:
+  - if [[ -z "$DISABLE_TESTS" ]]; then npm test; fi
+  - if [[ ! -z "$LINTING" ]]; then npm run lint; fi
+
+after_success:
+  - cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js && rm -rf ./coverage
