@@ -2,7 +2,6 @@
 
 const expect = require('chai').expect;
 const sinon = require('sinon');
-const path = require('path');
 const BbPromise = require('bluebird');
 const Serverless = require('serverless/lib/Serverless');
 const AwsProvider = require('serverless/lib/plugins/aws/provider/awsProvider');

@@ -1,10 +1,7 @@
 'use strict';
 
 const expect = require('chai').expect;
-const sinon = require('sinon');
-const fs = require('fs-extra');
 const path = require('path');
-const BbPromise = require('bluebird');
 const removeLibraries = require('./../lib/removeLibraries');
 
 describe('removeLibraries()', () => {

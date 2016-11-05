@@ -56,7 +56,6 @@ describe('decrypt()', () => {
       .stub(decrypt.provider, 'request').returns(BbPromise.resolve({ Plaintext: 'foo' }));
 
     return decrypt.decrypt().then(() => {
-
       expect(decryptStub.calledOnce).to.be.equal(true);
       expect(decryptStub.calledWithExactly(
         'KMS',
