@@ -15,6 +15,7 @@ class Crypt {
     this.serverless = serverless;
     this.options = options || {};
     this.provider = this.serverless.getProvider('aws');
+    this.secret_file = SECRET_FILE;
 
     Object.assign(
       this,
@@ -27,38 +28,36 @@ class Crypt {
     );
 
     this.commands = {
-      commands: {
-        encrypt: {
-          usage: 'Encrypt the secret',
-          lifecycleEvents: [
-            'encrypt',
-          ],
-          options: {
-            name: {
-              usage: 'Name of the secert',
-              shortcut: 'n',
-              required: true,
-            },
-            text: {
-              usage: 'Plaintext to encrypt',
-              shortcut: 't',
-            },
-            save: {
-              usage: `Save the encrypted secret (to ${SECRET_FILE}`,
-            },
+      encrypt: {
+        usage: 'Encrypt the secret',
+        lifecycleEvents: [
+          'encrypt',
+        ],
+        options: {
+          name: {
+            usage: 'Name of the secert',
+            shortcut: 'n',
+            required: true,
+          },
+          text: {
+            usage: 'Plaintext to encrypt',
+            shortcut: 't',
+          },
+          save: {
+            usage: `Save the encrypted secret (to ${SECRET_FILE}`,
           },
         },
-        decrypt: {
-          usage: 'Decrypt the encrypted secret',
-          lifecycleEvents: [
-            'decrypt',
-          ],
-          options: {
-            name: {
-              usage: 'Name of the secert',
-              shortcut: 'n',
-              required: true,
-            },
+      },
+      decrypt: {
+        usage: 'Decrypt the encrypted secret',
+        lifecycleEvents: [
+          'decrypt',
+        ],
+        options: {
+          name: {
+            usage: 'Name of the secert',
+            shortcut: 'n',
+            required: true,
           },
         },
       },
