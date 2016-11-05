@@ -67,9 +67,15 @@ class Crypt {
       'before:deploy:function:deploy': () => BbPromise.bind(this)
         .then(this.validate)
         .then(this.addLibraries),
+      'after:deploy:function:deploy': () => BbPromise.bind(this)
+        .then(this.validate)
+        .then(this.removeLibraries),
       'before:deploy:createDeploymentArtifacts': () => BbPromise.bind(this)
         .then(this.validate)
         .then(this.addLibraries),
+      'after:deploy:deploy': () => BbPromise.bind(this)
+        .then(this.validate)
+        .then(this.removeLibraries),
       'encrypt:encrypt': () => BbPromise.bind(this)
         .then(this.validate)
         .then(this.encrypt)
@@ -80,3 +86,5 @@ class Crypt {
     };
   }
 }
+
+module.exports = Crypt;
