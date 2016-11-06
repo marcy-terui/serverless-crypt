@@ -1,7 +1,7 @@
 {
   "name": "serverless-crypt",
   "version": "0.0.1",
-  "description": "Securing the secrets on Serverless Framework by AWS KMS encrypting.",
+  "description": "Securing the secrets on Serverless Framework by AWS KMS encryption.",
   "main": "index.js",
   "scripts": {
     "test": "./node_modules/.bin/istanbul cover ./node_modules/mocha/bin/_mocha",

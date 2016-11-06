@@ -7,7 +7,7 @@ serverless-crypt
 
 # Description
 
-Securing the secrets on Serverless Framework by AWS KMS encrypting.
+Securing the secrets on Serverless Framework by AWS KMS encryption.
 
 # Requirements
 
@@ -106,7 +106,7 @@ custom:
 ### 4. Encrypt and save the secret to your secret file  
 Command example:  
 ```sh
-serverless encrypt -n foo -t "This is a secret" --save
+serverless encrypt -n secret_name -t "This is a secret" --save
 ```
 
 ### 5. Write your function  
@@ -122,7 +122,7 @@ Code example:
 const slscrypt = require('slscrypt');
 
 module.exports.hello = (event, context, callback) => {
-  slscrypt.get('test').then((txt) => {
+  slscrypt.get('secret_name').then((txt) => {
     const response = {
       statusCode: 200,
       body: JSON.stringify({
@@ -144,7 +144,7 @@ import slscrypt
 
 def hello(event, context):
     body = {
-        "message": slscrypt.get('test'),
+        "message": slscrypt.get('secret_name'),
         "input": event
     }
     response = {
