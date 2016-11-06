@@ -1,6 +1,6 @@
 {
   "name": "serverless-crypt",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Securing the secrets on Serverless Framework by AWS KMS encryption.",
   "main": "index.js",
   "scripts": {
@@ -44,6 +44,7 @@
   },
   "dependencies": {
     "aws-sdk": "^2.6.13",
+    "bluebird": "^3.4.6",
     "fs-extra": "^1.0.0"
   }
 }
