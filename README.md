@@ -16,7 +16,7 @@ Securing the secrets on Serverless Framework by AWS KMS encryption.
 # Installation
 
 ```sh
-npm install serverless-crypt
+npm install serverless-crypt --save
 ```
 
 # Configuration
@@ -33,7 +33,6 @@ plugins:
   - serverless-crypt
 
 custom:
-  custom:
     cryptKeyId: ${env:AWS_KMS_KEYID}
 ```
 
@@ -99,8 +98,7 @@ plugins:
   - serverless-crypt
 
 custom:
-  custom:
-    cryptKeyId: ${env:AWS_KMS_KEYID}
+  cryptKeyId: ${env:AWS_KMS_KEYID}
 ```
 
 ### 4. Encrypt and save the secret to your secret file  
