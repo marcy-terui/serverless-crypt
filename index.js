@@ -8,14 +8,14 @@ const saveSecret = require('./lib/saveSecret');
 const addLibraries = require('./lib/addLibraries');
 const removeLibraries = require('./lib/removeLibraries');
 
-const SECRET_FILE = '.serverless-secret.json';
+const SECRET_LOCATION = 'file://.serverless-secret.json';
 
 class Crypt {
   constructor(serverless, options) {
     this.serverless = serverless;
     this.options = options || {};
     this.provider = this.serverless.getProvider('aws');
-    this.secret_file = SECRET_FILE;
+    this.secret_location = options.location || options.l || SECRET_LOCATION;
 
     Object.assign(
       this,
@@ -34,6 +34,11 @@ class Crypt {
           'encrypt',
         ],
         options: {
+          location: {
+            usage: 'URL to storage, supported URI formats are file:// and s3://, no specifier is assumed to be a file path',
+            shortcut: 'l',
+            required: false
+          },
           name: {
             usage: 'Name of the secert',
             shortcut: 'n',
@@ -44,7 +49,7 @@ class Crypt {
             shortcut: 't',
           },
           save: {
-            usage: `Save the encrypted secret (to ${SECRET_FILE}`,
+            usage: `Save the encrypted secret (to ${this.secret_location}`,
           },
         },
       },
@@ -54,6 +59,11 @@ class Crypt {
           'decrypt',
         ],
         options: {
+          location: {
+            usage: `URL to storage, supported are file:/// and s3://, defaults to ${SECRET_LOCATION}`,
+            shortcut: 'l',
+            required: false
+          },
           name: {
             usage: 'Name of the secert',
             shortcut: 'n',
