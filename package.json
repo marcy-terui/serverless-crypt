@@ -43,8 +43,9 @@
     "tap": "^8.0.0"
   },
   "dependencies": {
-    "aws-sdk": "^2.6.13",
+    "aws-sdk": "^2.22.0",
     "bluebird": "^3.4.6",
+    "eslint-plugin-import": "^2.2.0",
     "fs-extra": "^1.0.0"
   }
 }
