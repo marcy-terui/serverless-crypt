@@ -64,16 +64,22 @@ class Crypt {
     };
 
     this.hooks = {
-      'before:deploy:function:deploy': () => BbPromise.bind(this)
+      'before:deploy:function:packageFunction': () => BbPromise.bind(this)
         .then(this.validate)
         .then(this.addLibraries),
-      'after:deploy:function:deploy': () => BbPromise.bind(this)
+      'after:deploy:function:packageFunction': () => BbPromise.bind(this)
         .then(this.validate)
         .then(this.removeLibraries),
-      'before:deploy:createDeploymentArtifacts': () => BbPromise.bind(this)
+      'before:package:createDeploymentArtifacts': () => BbPromise.bind(this)
         .then(this.validate)
         .then(this.addLibraries),
-      'after:deploy:deploy': () => BbPromise.bind(this)
+      'after:package:createDeploymentArtifacts': () => BbPromise.bind(this)
+        .then(this.validate)
+        .then(this.removeLibraries),
+      'before:invoke:local:invoke': () => BbPromise.bind(this)
+        .then(this.validate)
+        .then(this.addLibraries),
+      'after:invoke:local:invoke': () => BbPromise.bind(this)
         .then(this.validate)
         .then(this.removeLibraries),
       'encrypt:encrypt': () => BbPromise.bind(this)
