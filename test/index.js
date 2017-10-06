@@ -121,6 +121,38 @@ describe('Crypt', () => {
       });
     });
 
+    it('should run promise chain in order for before:invoke:local:invoke', () => {
+      const validateStub = sinon
+        .stub(crypt, 'validate').returns(BbPromise.resolve());
+      const addLibrariesStub = sinon
+        .stub(crypt, 'addLibraries').returns(BbPromise.resolve());
+
+      return crypt.hooks['before:invoke:local:invoke']().then(() => {
+        expect(validateStub.calledOnce).to.equal(true);
+        expect(addLibrariesStub.calledAfter(validateStub))
+          .to.equal(true);
+
+        crypt.validate.restore();
+        crypt.addLibraries.restore();
+      });
+    });
+
+    it('should run promise chain in order for after:invoke:local:invoke', () => {
+      const validateStub = sinon
+        .stub(crypt, 'validate').returns(BbPromise.resolve());
+      const removeLibrariesStub = sinon
+        .stub(crypt, 'removeLibraries').returns(BbPromise.resolve());
+
+      return crypt.hooks['after:invoke:local:invoke']().then(() => {
+        expect(validateStub.calledOnce).to.equal(true);
+        expect(removeLibrariesStub.calledAfter(validateStub))
+          .to.equal(true);
+
+        crypt.validate.restore();
+        crypt.removeLibraries.restore();
+      });
+    });
+
     it('should run promise chain in order for encrypt:encrypt', () => {
       const validateStub = sinon
         .stub(crypt, 'validate').returns(BbPromise.resolve());
