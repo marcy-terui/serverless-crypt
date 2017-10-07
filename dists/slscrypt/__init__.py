@@ -11,4 +11,4 @@ def get(name):
     data = json.load(open(SECRET_FILE, 'r'))
     client = boto3.client(service_name='kms', region_name=data.get('__slscrypt-region'))
     return client.decrypt(
-        CiphertextBlob=base64.b64decode(data.get(name))).get('Plaintext')
+        CiphertextBlob=base64.b64decode(data.get(name))).get('Plaintext').decode()
