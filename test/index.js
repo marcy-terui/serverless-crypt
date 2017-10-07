@@ -57,13 +57,13 @@ describe('Crypt', () => {
     //   expect(cryptWithEmptyOptions.options).to.deep.equal({});
     // });
 
-    it('should run promise chain in order for before:deploy:function:deploy', () => {
+    it('should run promise chain in order for before:deploy:function:packageFunction', () => {
       const validateStub = sinon
         .stub(crypt, 'validate').returns(BbPromise.resolve());
       const addLibrariesStub = sinon
         .stub(crypt, 'addLibraries').returns(BbPromise.resolve());
 
-      return crypt.hooks['before:deploy:function:deploy']().then(() => {
+      return crypt.hooks['before:deploy:function:packageFunction']().then(() => {
         expect(validateStub.calledOnce).to.equal(true);
         expect(addLibrariesStub.calledAfter(validateStub))
           .to.equal(true);
@@ -73,13 +73,13 @@ describe('Crypt', () => {
       });
     });
 
-    it('should run promise chain in order for after:deploy:function:deploy', () => {
+    it('should run promise chain in order for after:deploy:function:packageFunction', () => {
       const validateStub = sinon
         .stub(crypt, 'validate').returns(BbPromise.resolve());
       const removeLibrariesStub = sinon
         .stub(crypt, 'removeLibraries').returns(BbPromise.resolve());
 
-      return crypt.hooks['after:deploy:function:deploy']().then(() => {
+      return crypt.hooks['after:deploy:function:packageFunction']().then(() => {
         expect(validateStub.calledOnce).to.equal(true);
         expect(removeLibrariesStub.calledAfter(validateStub))
           .to.equal(true);
@@ -89,13 +89,13 @@ describe('Crypt', () => {
       });
     });
 
-    it('should run promise chain in order for before:deploy:createDeploymentArtifacts', () => {
+    it('should run promise chain in order for before:package:createDeploymentArtifacts', () => {
       const validateStub = sinon
         .stub(crypt, 'validate').returns(BbPromise.resolve());
       const addLibrariesStub = sinon
         .stub(crypt, 'addLibraries').returns(BbPromise.resolve());
 
-      return crypt.hooks['before:deploy:createDeploymentArtifacts']().then(() => {
+      return crypt.hooks['before:package:createDeploymentArtifacts']().then(() => {
         expect(validateStub.calledOnce).to.equal(true);
         expect(addLibrariesStub.calledAfter(validateStub))
           .to.equal(true);
@@ -105,13 +105,45 @@ describe('Crypt', () => {
       });
     });
 
-    it('should run promise chain in order for after:deploy:deploy', () => {
+    it('should run promise chain in order for after:package:createDeploymentArtifacts', () => {
       const validateStub = sinon
         .stub(crypt, 'validate').returns(BbPromise.resolve());
       const removeLibrariesStub = sinon
         .stub(crypt, 'removeLibraries').returns(BbPromise.resolve());
 
-      return crypt.hooks['after:deploy:deploy']().then(() => {
+      return crypt.hooks['after:package:createDeploymentArtifacts']().then(() => {
+        expect(validateStub.calledOnce).to.equal(true);
+        expect(removeLibrariesStub.calledAfter(validateStub))
+          .to.equal(true);
+
+        crypt.validate.restore();
+        crypt.removeLibraries.restore();
+      });
+    });
+
+    it('should run promise chain in order for before:invoke:local:invoke', () => {
+      const validateStub = sinon
+        .stub(crypt, 'validate').returns(BbPromise.resolve());
+      const addLibrariesStub = sinon
+        .stub(crypt, 'addLibraries').returns(BbPromise.resolve());
+
+      return crypt.hooks['before:invoke:local:invoke']().then(() => {
+        expect(validateStub.calledOnce).to.equal(true);
+        expect(addLibrariesStub.calledAfter(validateStub))
+          .to.equal(true);
+
+        crypt.validate.restore();
+        crypt.addLibraries.restore();
+      });
+    });
+
+    it('should run promise chain in order for after:invoke:local:invoke', () => {
+      const validateStub = sinon
+        .stub(crypt, 'validate').returns(BbPromise.resolve());
+      const removeLibrariesStub = sinon
+        .stub(crypt, 'removeLibraries').returns(BbPromise.resolve());
+
+      return crypt.hooks['after:invoke:local:invoke']().then(() => {
         expect(validateStub.calledOnce).to.equal(true);
         expect(removeLibrariesStub.calledAfter(validateStub))
           .to.equal(true);
