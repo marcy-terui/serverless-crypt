@@ -1,6 +1,6 @@
 {
   "name": "serverless-crypt",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "Securing the secrets on Serverless Framework by AWS KMS encryption.",
   "main": "index.js",
   "scripts": {
