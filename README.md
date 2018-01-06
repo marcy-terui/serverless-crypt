@@ -18,6 +18,10 @@ Securing the secrets on Serverless Framework by AWS KMS encryption.
 ```sh
 npm install serverless-crypt --save
 ```
+For now ([issue to track](https://github.com/marcy-terui/serverless-crypt/issues/2)), you also need to install serverless locally:
+```sh
+npm install serverless --save
+```
 
 # Configuration
 
