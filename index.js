@@ -1,6 +1,7 @@
 'use strict';
 
 const BbPromise = require('bluebird');
+const fs = require('fs');
 const validate = require('serverless/lib/plugins/aws/lib/validate');
 const encrypt = require('./lib/encrypt');
 const decrypt = require('./lib/decrypt');
@@ -90,6 +91,29 @@ class Crypt {
         .then(this.validate)
         .then(this.decrypt),
     };
+
+    const delegate = serverless.variables.getValueFromSource.bind(serverless.variables);
+    serverless.variables.getValueFromSource = async (variableString) => {
+      if (variableString.startsWith(`decrypt:`)) {
+        const variableName = variableString.split(':')[1];
+        const secrets = JSON.parse(fs.readFileSync(this.secret_file, 'utf8'));
+
+        const params = {
+          CiphertextBlob: new Buffer(secrets[variableName], 'base64'),
+        };
+
+        return await this.provider.request(
+          'KMS',
+          'decrypt',
+          params,
+          this.options.stage, this.options.region
+        ).then((ret) => {
+          return ret.Plaintext.toString('utf-8');
+        });
+      }
+
+      return delegate(variableString);
+    }
   }
 }
 
