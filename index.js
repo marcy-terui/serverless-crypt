@@ -35,7 +35,7 @@ class Crypt {
         ],
         options: {
           name: {
-            usage: 'Name of the secert',
+            usage: 'Name of the secret',
             shortcut: 'n',
             required: true,
             type: 'string',
@@ -46,7 +46,7 @@ class Crypt {
             type: 'string',
           },
           save: {
-            usage: `Save the encrypted secret (to ${SECRET_FILE}`,
+            usage: `Save the encrypted secret (to ${SECRET_FILE})`,
             type: 'boolean',
           },
         },
@@ -58,7 +58,7 @@ class Crypt {
         ],
         options: {
           name: {
-            usage: 'Name of the secert',
+            usage: 'Name of the secret',
             shortcut: 'n',
             required: true,
             type: 'string',
